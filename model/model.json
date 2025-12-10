@@ -1,0 +1,9 @@
+{
+  "_note": "Placeholder model.json. Ganti file ini dengan model TensorFlow.js yang sudah diekspor (beserta file bobot .bin) agar aplikasi dapat berjalan.",
+  "_how_to": [
+    "1. Latih model CNN / MobileNet di Python atau JS dengan 5 kelas emosi: senang, sedih, marah, takut, netral.",
+    "2. Ekspor ke format TensorFlow.js menggunakan tensorflowjs_converter.",
+    "3. Salin model.json hasil ekspor ini ke folder 'model' menggantikan file ini.",
+    "4. Salin juga semua file bobot (group*-shard*.bin) ke folder 'model'."
+  ]
+}

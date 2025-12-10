@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deteksi Emosi Wajah - TensorFlow.js</title>
+    <!-- Stylesheet utama -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- TensorFlow.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.21.0/dist/tf.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Deteksi Emosi Wajah</h1>
+            <p>Deteksi emosi: senang, sedih, marah, takut, dan netral langsung di browser menggunakan TensorFlow.js.</p>
+        </header>
+
+        <main class="app-main">
+            <section class="upload-section">
+                <h2>1. Upload Gambar Wajah</h2>
+                <p>Pilih gambar wajah (format JPG/PNG). Usahakan satu wajah utama memenuhi gambar.</p>
+                <label for="imageUpload" class="btn btn-primary">Pilih Gambar</label>
+                <input type="file" id="imageUpload" accept="image/*" />
+            </section>
+
+            <section class="preview-section">
+                <h2>2. Preview Gambar</h2>
+                <div class="preview-wrapper">
+                    <img id="imagePreview" alt="Preview wajah" />
+                </div>
+            </section>
+
+            <section class="action-section">
+                <h2>3. Deteksi Emosi</h2>
+                <button id="detectButton" class="btn btn-detect" disabled>Deteksi Emosi</button>
+                <p id="statusText" class="status-text">Model belum dimuat.</p>
+            </section>
+
+            <section class="result-section">
+                <h2>4. Hasil Deteksi</h2>
+                <div id="resultContainer" class="result-container"></div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <h3>Cara Menjalankan Aplikasi</h3>
+            <ol>
+                <li>Letakkan file <code>index.html</code>, <code>style.css</code>, <code>script.js</code>, dan folder <code>model</code> dalam satu folder yang sama.</li>
+                <li>Jalankan aplikasi dengan salah satu cara:
+                    <ul>
+                        <li>Buka folder ini dengan ekstensi Live Server (VS Code) atau server statis lain.</li>
+                        <li>Atau gunakan perintah seperti <code>npx serve .</code> di folder proyek.</li>
+                    </ul>
+                </li>
+                <li>Buka alamat yang diberikan server (misalnya <code>http://localhost:3000</code>), lalu upload gambar dan klik "Deteksi Emosi".</li>
+            </ol>
+
+            <h3>Cara Mengganti Model dengan Dataset Lain</h3>
+            <ol>
+                <li>Latih model CNN atau model transfer learning (misalnya MobileNet) menggunakan dataset emosi wajah (contoh: FER2013) di lingkungan Python atau JavaScript.</li>
+                <li>Pastikan output layer memiliki 5 neuron untuk kelas:
+                    <code>["senang", "sedih", "marah", "takut", "netral"]</code> dengan aktivasi softmax.</li>
+                <li>Jika melatih di Python (TensorFlow/Keras), ekspor ke format TensorFlow.js menggunakan <code>tensorflowjs_converter</code> sehingga menghasilkan <code>model.json</code> dan file bobot (weights) <code>group*-shard*.bin</code>.</li>
+                <li>Salin <code>model.json</code> dan seluruh file bobot ke folder <code>model/</code> menggantikan file placeholder yang ada.</li>
+                <li>Pastikan ukuran input model adalah <code>48x48</code> (grayscale) atau <code>224x224x3</code> (RGB). Di <code>script.js</code> sudah disiapkan contoh pra-pemrosesan untuk <code>224x224</code> dan opsi sederhana untuk <code>48x48</code>.</li>
+                <li>Jika mengubah urutan label atau jumlah kelas, sesuaikan array <code>EMOTION_LABELS</code> di <code>script.js</code> agar hasil prediksi sesuai.</li>
+            </ol>
+        </footer>
+    </div>
+
+    <!-- Script utama aplikasi -->
+    <script src="script.js"></script>
+</body>
+</html>
